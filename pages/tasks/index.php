@@ -376,6 +376,7 @@ $pending   = $total - $completed;
                             Cancel
                         </button>
                         <button type="submit"
+                            id="add-btn"
                             class="flex-1 bg-accent hover:bg-accent-hover text-accent-text text-sm font-semibold py-2.5 rounded-lg transition-colors">
                             Create Task
                         </button>
@@ -424,6 +425,7 @@ $pending   = $total - $completed;
                             Cancel
                         </button>
                         <button type="submit"
+                            id="edit-btn"
                             class="flex-1 bg-accent hover:bg-accent-hover text-accent-text text-sm font-semibold py-2.5 rounded-lg transition-colors">
                             Save Changes
                         </button>
@@ -457,6 +459,7 @@ $pending   = $total - $completed;
                         Cancel
                     </button>
                     <button type="submit"
+                        id="delete-btn"
                         class="flex-1 bg-red-500 hover:bg-red-600 text-white text-sm font-semibold py-2.5 rounded-lg transition-colors">
                         Delete
                     </button>
@@ -467,6 +470,22 @@ $pending   = $total - $completed;
 </main>
 
 <script>
+    // Add dialog disable btn
+    const createForm = document.querySelector('#add-dialog form');
+    const createButton = document.getElementById('add-btn');
+
+    createForm.addEventListener('submit', () => {
+
+        createButton.disabled = true;
+
+        createButton.innerText = 'Creating task...';
+
+        createButton.classList.add(
+            'opacity-70',
+            'cursor-not-allowed'
+        );
+    });
+    // Edit Dialog
     function openEditDialog(id, title, description) {
 
         const dialog = document.getElementById('edit-dialog');
@@ -480,6 +499,24 @@ $pending   = $total - $completed;
         dialog.showModal();
     }
 
+    // Edit dialog disable btn
+    const updateForm = document.querySelector('#edit-dialog form');
+    const updateButton = document.getElementById('edit-btn');
+
+    updateForm.addEventListener('submit', () => {
+
+        updateButton.disabled = true;
+
+        updateButton.innerText = 'Saving changes...';
+
+        updateButton.classList.add(
+            'opacity-70',
+            'cursor-not-allowed'
+        );
+    });
+
+    // Delete Dialog
+
     function openDeleteDialog(id, title) {
 
         const dialog = document.getElementById('delete-dialog');
@@ -492,6 +529,24 @@ $pending   = $total - $completed;
         dialog.showModal();
     }
 
+    // Delete dialog disable btn
+    const deleteForm = document.querySelector('#delete-dialog form');
+    const deleteDialogButton = document.getElementById('delete-btn');
+
+    deleteForm.addEventListener('submit', () => {
+
+        deleteDialogButton.disabled = true;
+
+        deleteDialogButton.innerText = 'Deleting...';
+
+        deleteDialogButton.classList.add(
+            'opacity-70',
+            'cursor-not-allowed'
+        );
+    });
+
+
+                            
     document.querySelectorAll('dialog').forEach(dialog => {
 
         dialog.addEventListener('click', function(e) {

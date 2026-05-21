@@ -26,14 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($success) {
             $message = "User registered!";
-            
         } else {
             $message = "Registration failed.";
         }
     }
 }
 ?>
-
 
 <!-- ══ HEADER ══ -->
 <header class="text-center pt-12 pb-6 px-4">
@@ -121,9 +119,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         class="w-full bg-surface border border-border text-white text-sm rounded-lg px-4 py-3 placeholder-subtle outline-none focus:border-accent transition-colors duration-150" />
                     <p class="text-xs mt-1.5 hidden text-red-400" id="match-msg">Passwords do not match.</p>
                 </div>
-                
+
                 <!-- Submit -->
                 <button
+                    id="submit-btn"
                     type="submit"
                     class="w-full bg-accent hover:bg-accent-hover text-accent-text text-sm font-semibold py-3 rounded-lg transition-colors duration-150">
                     Create account
@@ -145,3 +144,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 </main>
+
+
+<script>
+    const form = document.querySelector('form');
+    const button = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', () => {
+
+        button.disabled = true;
+
+        button.innerText = 'Creating account...';
+
+        button.classList.add(
+            'opacity-70',
+            'cursor-not-allowed'
+        );
+    });
+</script>

@@ -48,11 +48,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="bg-card border border-border rounded-2xl px-6 sm:px-8 py-8">
 
             <!-- Message slot (PHP will echo here) -->
-            <!-- <?php if (!empty($message)): ?>
-        <div class="mb-4 text-sm text-center rounded-lg px-4 py-2 bg-red-500/10 text-red-400 border border-red-500/20">
-          <?= htmlspecialchars($message) ?>
-        </div>
-        <?php endif; ?> -->
+            <?php if (!empty($message)): ?>
+                <div class="mb-4 text-sm text-center rounded-lg px-4 py-2 bg-red-500/10 text-red-400 border border-red-500/20">
+                    <?= htmlspecialchars($message) ?>
+                </div>
+            <?php endif; ?>
 
             <form method="POST" class="space-y-5">
 
@@ -100,6 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <!-- Submit -->
                 <button
+                    id="login-btn"
                     type="submit"
                     class="w-full bg-accent hover:bg-accent-hover text-accent-text text-sm font-semibold py-3 rounded-lg transition-colors duration-150">
                     Sign in
@@ -125,3 +126,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 </main>
+
+<script>
+    const form = document.querySelector('form');
+    const button = document.getElementById('login-btn');
+
+    form.addEventListener('submit', () => {
+
+        button.disabled = true;
+
+        button.innerText = 'Signing in...';
+
+        button.classList.add(
+            'opacity-70',
+            'cursor-not-allowed'
+        );
+    });
+</script>

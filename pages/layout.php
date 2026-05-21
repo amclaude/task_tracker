@@ -58,15 +58,37 @@ if ($request === '' || $request === 'index') {
     $file = __DIR__ . "/$request/index.php";
 }
 
+try {
 
-if (file_exists($file)) {
+    if (file_exists($file)) {
+
+        ob_start();
+
+        require $file;
+
+        $page_content = ob_get_clean();
+
+    } else {
+
+        http_response_code(404);
+
+        ob_start();
+
+        require_once __DIR__ . "/partials/404.php";
+
+        $page_content = ob_get_clean();
+    }
+
+} catch (Throwable $e) {
+
+    error_log($e);
+
+    http_response_code(500);
+
     ob_start();
-    require $file;
-    $page_content = ob_get_clean();
-} else {
-    // http_response_code(404);
-    ob_start();
-    require_once __DIR__ . "/partials/404.php";
+
+    require_once __DIR__ . "/partials/500.php";
+
     $page_content = ob_get_clean();
 }
 
